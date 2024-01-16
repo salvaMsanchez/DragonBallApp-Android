@@ -126,7 +126,7 @@ Para abordar esta situación, es crucial garantizar la destrucción adecuada de 
 <a name="licencia"></a>
 ### Licencia
 
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](https://github.com/salvaMsanchez/fundamentos-android-bootcamp/blob/main/LICENSE.md) para más detalles.
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](https://github.com/salvaMsanchez/DragonBallApp-Android/blob/main/LICENSE.md) para más detalles.
 
 ---
 
