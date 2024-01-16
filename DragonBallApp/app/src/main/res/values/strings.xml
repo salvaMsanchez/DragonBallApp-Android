@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">DragonBallAppAvanzado</string>
 
+    <!-- BottomBar -->
+    <string name="heroes">Héroes</string>
+    <string name="favorites">Favoritos</string>
+
     <string name="login_image_view_content_description">Dragon Ball Logo</string>
     <string name="title_loggin">Iniciar sesión</string>
     <string name="subtitle_loggin">Acceda a su cuenta</string>
@@ -20,4 +24,7 @@
     <string name="load_characters_failed">Lo siento. No se han podido recuperar los datos desde el servidor. Reinicia la aplicación o vuelva a entrar en otro momento.</string>
     <string name="character_defeated">Personaje derrotado</string>
     <string name="training_harder">¡Tienes que entrenar más!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

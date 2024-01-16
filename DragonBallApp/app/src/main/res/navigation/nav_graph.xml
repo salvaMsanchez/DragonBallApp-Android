@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/charactersFragment">
+
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.example.dragonballappavanzado.presentation.main.characterDetail.CharacterDetailFragment"
+        android:label="fragment_character_detail"
+        tools:layout="@layout/fragment_character_detail" />
+    <fragment
+        android:id="@+id/charactersFragment"
+        android:name="com.example.dragonballappavanzado.presentation.main.characters.CharactersFragment"
+        android:label="fragment_characters"
+        tools:layout="@layout/fragment_characters" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.dragonballappavanzado.presentation.main.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+</navigation>
