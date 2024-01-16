@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         initUI()
     }
 
+    // FUNCTIONS
     private fun initUI() {
         initNavigation()
     }
