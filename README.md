@@ -62,6 +62,13 @@
 
 ![Demo app Android gif](images/demoAppAndroid.gif)
 
+### APUNTES
+
+- Seguir con la implementación del SharedPreferences. ✅
+- Acabar de implementar el Login y pasar al listado de Héroes
+
+Minuto 1.38 del video de android intermedio de Aristidevs
+
 <a name="descripcion"></a>
 ### Descripción
 
@@ -96,6 +103,8 @@ Dragon Ball Battle Simulator es una aplicación Android desarrollada en Kotlin q
 
 <a name="problemas"></a>
 ### Problemas, decisiones y resolución
+
+* Podemos mencionar el problema del manejo del token al gestionarlo con el context y la facilidad que tiene su implmentaciñón con DaggerHilt
 
 #### Manejo del Token en SharedPreferences
 
