@@ -13,17 +13,17 @@ class Repository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
 ) {
     // FUNCTIONS
-    suspend fun saveToken(token: String) = localDataSource.saveToken(token)
+    fun saveToken(token: String) = localDataSource.saveToken(token)
 
-    suspend fun getToken(): String = localDataSource.getToken()
+    fun getToken(): String = localDataSource.getToken()
 
-    suspend fun saveEmail(email: String) = localDataSource.saveEmail(email)
+    fun saveEmail(email: String) = localDataSource.saveEmail(email)
 
-    suspend fun getEmail(): String = localDataSource.getEmail()
+    //suspend fun getEmail(): String = localDataSource.getEmail()
 
-    suspend fun savePassword(password: String) = localDataSource.savePassword(password)
+    fun savePassword(password: String) = localDataSource.savePassword(password)
 
-    suspend fun getPassword(): String = localDataSource.getPassword()
+    //suspend fun getPassword(): String = localDataSource.getPassword()
 
     suspend fun login(): LoginResult {
         return try {

@@ -24,15 +24,23 @@ class LoginActivity : AppCompatActivity() {
     // VIEW BINDING
     private lateinit var binding: ActivityLoginBinding
     // VIEW MODEL
-    val viewModel: LoginActivityViewModel by viewModels()
+    private val viewModel: LoginActivityViewModel by viewModels()
 
     // LIFECYCLE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        initUI()
+        val isThereToken: Boolean = viewModel.onCreateView()
+
+        if (isThereToken) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+            initUI()
+        }
     }
 
     // FUNCTIONS
@@ -92,9 +100,9 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToHome() {
         Log.d("SALVA", "NAVEGAMOOOOOOOSSS")
         // SharedPreferencesService.saveToken(this, token = token)
-        //val intent = Intent(this, MainActivity::class.java)
-        //startActivity(intent)
-        //finish()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun onFieldChanged(hasFocus: Boolean = false) {

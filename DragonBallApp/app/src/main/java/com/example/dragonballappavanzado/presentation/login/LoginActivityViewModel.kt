@@ -25,10 +25,15 @@ class LoginActivityViewModel @Inject constructor(
     }
 
     // VIEW STATE
-    private val _viewState = MutableStateFlow<LoginViewState>(LoginViewState.Idle())
+    private val _viewState = MutableStateFlow<LoginViewState>(LoginViewState.Loading(false))
     val viewState: StateFlow<LoginViewState> = _viewState
 
     // FUNCTIONS
+    fun onCreateView(): Boolean {
+        val token = repository.getToken()
+        return token != "No Token" && token.isNotEmpty()
+    }
+
     fun onLoginSelected(email: String, password: String) {
         if (isValidEmail(email) && isValidPassword(password)) {
             saveCredentials(email, password)
