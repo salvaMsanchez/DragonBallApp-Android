@@ -3,7 +3,12 @@ package com.example.dragonballappavanzado.data
 import android.util.Log
 import com.example.dragonballappavanzado.data.local.LocalDataSource
 import com.example.dragonballappavanzado.data.local.sharedPreferences.SharedPreferencesService
+import com.example.dragonballappavanzado.data.mappers.LocalToUIMapper
+import com.example.dragonballappavanzado.data.mappers.RemoteToLocalMapper
 import com.example.dragonballappavanzado.data.remote.RemoteDataSource
+import com.example.dragonballappavanzado.data.remote.response.CharacterRemote
+import com.example.dragonballappavanzado.domain.models.CharacterLocal
+import com.example.dragonballappavanzado.presentation.main.characters.model.CharacterUI
 import okio.IOException
 import java.lang.Exception
 import javax.inject.Inject
@@ -11,6 +16,8 @@ import javax.inject.Inject
 class Repository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
+    private val localToUIMapper: LocalToUIMapper,
+    private val remoteToLocalMapper: RemoteToLocalMapper,
 ) {
     // FUNCTIONS
     fun saveToken(token: String) = localDataSource.saveToken(token)
@@ -36,6 +43,22 @@ class Repository @Inject constructor(
                 else -> "Autenticación fallida"
             }
             LoginResult.Error(errorMessage)
+        }
+    }
+
+    suspend fun getCharacters(): List<CharacterUI> {
+        val localCharacters: List<CharacterLocal> = localDataSource.getCharacters()
+
+        return if (localCharacters.isNotEmpty()) {
+            Log.d("SALVA", "Characters recuperados de BBDD")
+            localToUIMapper.mapCharacters(localCharacters)
+        } else {
+            Log.d("SALVA", "Characters recuperados de API")
+            val remoteCharacters: List<CharacterRemote> = remoteDataSource.getHeroes()
+            localDataSource.insertCharacters(remoteToLocalMapper.mapCharacters(remoteCharacters))
+
+            val updatedLocalCharacters: List<CharacterLocal> = localDataSource.getCharacters()
+            localToUIMapper.mapCharacters(updatedLocalCharacters)
         }
     }
 }
