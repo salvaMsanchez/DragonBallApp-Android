@@ -3,6 +3,7 @@ package com.example.dragonballappavanzado.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.dragonballappavanzado.data.local.sharedPreferences.SharedPreferencesService
+import com.example.dragonballappavanzado.di.annotations.LocalQualifier
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +18,7 @@ class LocalModule {
     fun provideContext(@ApplicationContext context: Context): Context = context
 
     @Provides
+    @LocalQualifier
     fun provideSharedPreferencesManager(context: Context): SharedPreferencesService = SharedPreferencesService(context)
 
 }

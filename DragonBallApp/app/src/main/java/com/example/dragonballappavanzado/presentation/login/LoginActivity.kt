@@ -3,6 +3,7 @@ package com.example.dragonballappavanzado.presentation.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
@@ -12,6 +13,7 @@ import com.example.dragonballappavanzado.databinding.ActivityLoginBinding
 import com.example.dragonballappavanzado.domain.extensions.dismissKeyboard
 import com.example.dragonballappavanzado.domain.extensions.loseFocusAfterAction
 import com.example.dragonballappavanzado.domain.extensions.onTextChanged
+import com.example.dragonballappavanzado.presentation.MainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -53,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
             is LoginViewState.Error -> loginError(viewState.errorMessage)
             is LoginViewState.Loading -> showLoading(viewState.loading)
             is LoginViewState.ValidCredentials -> controlCredentialsValidation(viewState.isValidEmail, viewState.isValidPassword)
-            is LoginViewState.AccessCompleted -> navigateToHome(viewState.token)
+            is LoginViewState.AccessCompleted -> navigateToHome()
         }
     }
 
@@ -87,9 +89,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToHome(token: String) {
+    private fun navigateToHome() {
+        Log.d("SALVA", "NAVEGAMOOOOOOOSSS")
         // SharedPreferencesService.saveToken(this, token = token)
-        //val intent = Intent(this, HomeActivity::class.java)
+        //val intent = Intent(this, MainActivity::class.java)
         //startActivity(intent)
         //finish()
     }

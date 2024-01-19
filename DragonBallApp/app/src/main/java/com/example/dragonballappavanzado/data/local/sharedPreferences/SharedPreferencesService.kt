@@ -18,9 +18,9 @@ class SharedPreferencesService @Inject constructor(@ApplicationContext private v
         return sharedPref.getString(key, defaultValue) ?: defaultValue
     }
 
-    fun saveEmail(context: Context, key: String = EMAIL_KEY, characters: String) {
+    fun saveEmail(key: String = EMAIL_KEY, email: String) {
         with (sharedPref.edit()) {
-            putString(key, characters)
+            putString(key, email)
             commit()
         }
     }
@@ -29,9 +29,9 @@ class SharedPreferencesService @Inject constructor(@ApplicationContext private v
         return sharedPref.getString(key, defaultValue) ?: defaultValue
     }
 
-    fun savePassword(context: Context, key: String = PASSWORD_KEY, characters: String) {
+    fun savePassword(key: String = PASSWORD_KEY, password: String) {
         with (sharedPref.edit()) {
-            putString(key, characters)
+            putString(key, password)
             commit()
         }
     }
@@ -47,7 +47,7 @@ class SharedPreferencesService @Inject constructor(@ApplicationContext private v
         }
     }
 
-    fun deleteToken(context: Context, key: String = TOKEN_KEY) {
+    fun deleteToken(key: String = TOKEN_KEY) {
         with (sharedPref.edit()) {
             remove(key)
             commit()

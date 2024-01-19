@@ -1,8 +1,10 @@
 package com.example.dragonballappavanzado.di
 
 import android.content.Context
+import android.util.Log
 import com.example.dragonballappavanzado.data.local.sharedPreferences.SharedPreferencesService
 import com.example.dragonballappavanzado.data.remote.DragonBallApi
+import com.example.dragonballappavanzado.di.annotations.NetworkQualifier
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -24,6 +26,7 @@ class NetworkModule {
     fun provideContext(@ApplicationContext context: Context): Context = context
 
     @Provides
+    @NetworkQualifier
     fun provideSharedPreferencesManager(context: Context): SharedPreferencesService = SharedPreferencesService(context)
 
     @Provides
@@ -31,18 +34,22 @@ class NetworkModule {
         return OkHttpClient.Builder().addInterceptor { chain ->
             val originalRequest = chain.request()
             if (originalRequest.url.encodedPath.contains("login")) {
+                Log.d("SALVA", "Llamada va por LOGIN")
                 val email = sharedPreferencesService.getEmail()
                 val password = sharedPreferencesService.getPassword()
+                Log.d("SALVA", "Email: $email y Contraseña: $password")
                 val credentials = Credentials.basic(email, password)
                 val newRequest =
                     originalRequest.newBuilder().addHeader("Authorization", credentials).build()
                 chain.proceed(newRequest)
             } else if (originalRequest.url.encodedPath.contains("heros")) {
+                Log.d("SALVA", "Llamada va por HEROS")
                 val token = sharedPreferencesService.getToken()
                 val newRequest =
                     originalRequest.newBuilder().addHeader("Authorization", "Bearer $token").build()
                 chain.proceed(newRequest)
             } else {
+                Log.d("SALVA", "Llamada va por NO SABE DÓNDE")
                 chain.proceed(originalRequest)
             }
         }.build()
@@ -58,7 +65,7 @@ class NetworkModule {
     @Provides
     fun providesRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder().client(okHttpClient).baseUrl("https://dragonball.keepcoding.education/")
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            //.addConverterFactory(MoshiConverterFactory.create(moshi))
             .addConverterFactory(ScalarsConverterFactory.create())
             .build()
     }
