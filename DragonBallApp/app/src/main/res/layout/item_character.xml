@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:contentDescription="Character Image"
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -28,7 +29,6 @@
         android:layout_height="wrap_content"
         tools:text="Trunks del Futuro"
         android:textSize="18sp"
-        android:textStyle="bold"
         android:textColor="@color/white"
         android:paddingBottom="8dp"
         android:paddingStart="16dp"

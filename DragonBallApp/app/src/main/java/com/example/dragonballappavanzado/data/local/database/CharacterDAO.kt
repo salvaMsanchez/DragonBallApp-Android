@@ -12,7 +12,7 @@ interface CharacterDAO {
     fun getAll(): List<CharacterLocal>
 
     @Insert
-    fun insertAll(heros: List<CharacterLocal>)
+    fun insertAll(heroes: List<CharacterLocal>)
 
     @Query("UPDATE characters SET favorite = :isFavorite WHERE name = :characterName")
     fun updateFavoriteStatus(characterName: String, isFavorite: Boolean)
