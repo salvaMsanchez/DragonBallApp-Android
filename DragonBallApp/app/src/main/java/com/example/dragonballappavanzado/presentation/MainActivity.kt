@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     // VIEW BINDING
     private lateinit var binding: ActivityMainBinding
-
+    // NAVIGATION CONTROLLER
     private lateinit var navController: NavController
 
     // LIFECYCLE

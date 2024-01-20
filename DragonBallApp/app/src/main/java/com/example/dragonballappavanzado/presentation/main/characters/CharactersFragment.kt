@@ -2,34 +2,30 @@ package com.example.dragonballappavanzado.presentation.main.characters
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dragonballappavanzado.R
 import com.example.dragonballappavanzado.databinding.FragmentCharactersBinding
-import com.example.dragonballappavanzado.presentation.login.LoginActivityViewModel
-import com.example.dragonballappavanzado.presentation.main.characterDetail.CharacterDetailFragment
-import com.example.dragonballappavanzado.presentation.main.characterDetail.CharacterDetailFragmentArgs
 import com.example.dragonballappavanzado.presentation.main.characters.adapter.CharactersAdapter
 import com.example.dragonballappavanzado.presentation.main.characters.model.CharacterUI
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharactersFragment : Fragment() {
     // VIEW BINDING
     private lateinit var binding: FragmentCharactersBinding
+
     // RECYCLER VIEW - ADAPTER
     private lateinit var adapter: CharactersAdapter
+
     // VIEW MODEL
     private val viewModel: CharactersViewModel by viewModels()
 
@@ -85,7 +81,7 @@ class CharactersFragment : Fragment() {
         binding.rvCharacters.isVisible = !loading
     }
 
-    private fun idle() { }
+    private fun idle() {}
 
     private fun configureRecyclerView() {
         // CAMBIAR DE POSICIÓN DE PERSONAJE A NOMBRE!!!!
@@ -100,14 +96,16 @@ class CharactersFragment : Fragment() {
         //val bindingHomeActivity = (requireActivity() as HomeActivity).binding
 
         //requireActivity().supportFragmentManager
-          //  .beginTransaction()
-          //  .replace(bindingHomeActivity.fragmentContainerView.id, characterDetailFragment)
-            //.addToBackStack(null)
-           // .commit()
+        //  .beginTransaction()
+        //  .replace(bindingHomeActivity.fragmentContainerView.id, characterDetailFragment)
+        //.addToBackStack(null)
+        // .commit()
 
         Log.d("SALVA", "Nombre del personaje seleccionado: $characterId")
         findNavController().navigate(
-            CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(characterId = characterId)
+            CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailActivity(
+                characterId = characterId
+            )
         )
     }
 }
