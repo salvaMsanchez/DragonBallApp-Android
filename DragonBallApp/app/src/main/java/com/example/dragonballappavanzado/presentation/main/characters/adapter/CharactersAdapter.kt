@@ -22,7 +22,7 @@ class CharactersAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: CharactersViewHolder, position: Int) {
-        viewHolder.bind(characters[position], characters[position].name, onItemSelected)
+        viewHolder.bind(characters[position], characters[position].id, onItemSelected)
     }
 
     override fun getItemCount(): Int = characters.size

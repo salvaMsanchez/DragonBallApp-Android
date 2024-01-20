@@ -9,12 +9,21 @@
         android:id="@+id/characterDetailFragment"
         android:name="com.example.dragonballappavanzado.presentation.main.characterDetail.CharacterDetailFragment"
         android:label="fragment_character_detail"
-        tools:layout="@layout/fragment_character_detail" />
+        tools:layout="@layout/fragment_character_detail" >
+        <argument
+            android:name="characterId"
+            app:argType="string"
+            android:defaultValue="CharacterId" />
+    </fragment>
     <fragment
         android:id="@+id/charactersFragment"
         android:name="com.example.dragonballappavanzado.presentation.main.characters.CharactersFragment"
         android:label="fragment_characters"
-        tools:layout="@layout/fragment_characters" />
+        tools:layout="@layout/fragment_characters" >
+        <action
+            android:id="@+id/action_charactersFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.dragonballappavanzado.presentation.main.favorites.FavoritesFragment"

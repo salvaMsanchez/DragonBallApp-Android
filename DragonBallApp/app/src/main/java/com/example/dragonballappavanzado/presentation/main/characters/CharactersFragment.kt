@@ -10,10 +10,13 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dragonballappavanzado.R
 import com.example.dragonballappavanzado.databinding.FragmentCharactersBinding
 import com.example.dragonballappavanzado.presentation.login.LoginActivityViewModel
+import com.example.dragonballappavanzado.presentation.main.characterDetail.CharacterDetailFragment
+import com.example.dragonballappavanzado.presentation.main.characterDetail.CharacterDetailFragmentArgs
 import com.example.dragonballappavanzado.presentation.main.characters.adapter.CharactersAdapter
 import com.example.dragonballappavanzado.presentation.main.characters.model.CharacterUI
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,13 +89,13 @@ class CharactersFragment : Fragment() {
 
     private fun configureRecyclerView() {
         // CAMBIAR DE POSICIÓN DE PERSONAJE A NOMBRE!!!!
-        adapter = CharactersAdapter { characterName -> goToDetail(characterName) }
+        adapter = CharactersAdapter { characterId -> goToDetail(characterId) }
         binding.rvCharacters.setHasFixedSize(true)
         binding.rvCharacters.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvCharacters.adapter = adapter
     }
 
-    private fun goToDetail(characterName: String) {
+    private fun goToDetail(characterId: String) {
         //val characterDetailFragment = CharacterDetailFragment.newInstance(characterPosition)
         //val bindingHomeActivity = (requireActivity() as HomeActivity).binding
 
@@ -102,6 +105,9 @@ class CharactersFragment : Fragment() {
             //.addToBackStack(null)
            // .commit()
 
-        Log.d("SALVA", "Nombre del personaje seleccionado: $characterName")
+        Log.d("SALVA", "Nombre del personaje seleccionado: $characterId")
+        findNavController().navigate(
+            CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(characterId = characterId)
+        )
     }
 }
