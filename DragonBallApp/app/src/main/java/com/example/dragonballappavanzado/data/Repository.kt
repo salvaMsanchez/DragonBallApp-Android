@@ -55,7 +55,8 @@ class Repository @Inject constructor(
         } else {
             Log.d("SALVA", "Characters recuperados de API")
             val remoteCharacters: List<CharacterRemote> = remoteDataSource.getHeroes()
-            localDataSource.insertCharacters(remoteToLocalMapper.mapCharacters(remoteCharacters))
+            val charactersCleaned: List<CharacterRemote> = remoteCharacters.dropLast(1)
+            localDataSource.insertCharacters(remoteToLocalMapper.mapCharacters(charactersCleaned))
 
             val updatedLocalCharacters: List<CharacterLocal> = localDataSource.getCharacters()
             localToUIMapper.mapCharacters(updatedLocalCharacters)

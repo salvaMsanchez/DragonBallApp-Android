@@ -64,10 +64,8 @@
 
 ### APUNTES
 
-- Seguir con la implementación del SharedPreferences. ✅
-- Acabar de implementar el Login y pasar al listado de Héroes
-
-Minuto 1.38 del video de android intermedio de Aristidevs
+- Pulsar en celda y navegar al detalle buscando en base de datos por ese nombre y cargarlo en viewModelDetail, además de hacer llamada a la api de las localizaciones de ese personaje, necesitnado su ID para ello. En Detail creamos un corazón para poder dar LIKE y actualizar en BBDD y en Remoto.
+- Lista de Favoritos llamando a BBDD y filtrar por aquellos personajes que sean favoritos.
 
 <a name="descripcion"></a>
 ### Descripción

@@ -10,8 +10,9 @@ class CharactersViewHolder(view: View): RecyclerView.ViewHolder(view) {
     // VIEW BINDING
     private var binding = ItemCharacterBinding.bind(view)
 
-    fun bind(character: CharacterUI, position: Int, onItemSelected: (Int) -> Unit) {
+    fun bind(character: CharacterUI, characterName: String, onItemSelected: (String) -> Unit) {
         binding.tvCharacterName.text = character.name
         binding.ivCharacter.load(character.photo)
+        binding.root.setOnClickListener {onItemSelected(characterName) }
     }
 }

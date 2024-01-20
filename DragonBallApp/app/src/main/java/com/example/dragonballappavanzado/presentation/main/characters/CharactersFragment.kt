@@ -86,13 +86,13 @@ class CharactersFragment : Fragment() {
 
     private fun configureRecyclerView() {
         // CAMBIAR DE POSICIÓN DE PERSONAJE A NOMBRE!!!!
-        adapter = CharactersAdapter { characterPosition -> goToDetail(characterPosition) }
+        adapter = CharactersAdapter { characterName -> goToDetail(characterName) }
         binding.rvCharacters.setHasFixedSize(true)
         binding.rvCharacters.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvCharacters.adapter = adapter
     }
 
-    private fun goToDetail(characterPosition: Int) {
+    private fun goToDetail(characterName: String) {
         //val characterDetailFragment = CharacterDetailFragment.newInstance(characterPosition)
         //val bindingHomeActivity = (requireActivity() as HomeActivity).binding
 
@@ -102,6 +102,6 @@ class CharactersFragment : Fragment() {
             //.addToBackStack(null)
            // .commit()
 
-        Log.d("SALVA", "Nombre del personaje seleccionado: $characterPosition")
+        Log.d("SALVA", "Nombre del personaje seleccionado: $characterName")
     }
 }
