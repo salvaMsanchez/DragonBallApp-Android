@@ -1,6 +1,5 @@
 package com.example.dragonballappavanzado.presentation.main.characters
 
-import com.example.dragonballappavanzado.presentation.login.LoginViewState
 import com.example.dragonballappavanzado.presentation.main.characters.model.CharacterUI
 
 sealed class CharactersViewState {

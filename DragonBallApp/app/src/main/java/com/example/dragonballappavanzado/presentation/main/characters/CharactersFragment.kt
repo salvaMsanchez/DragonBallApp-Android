@@ -84,7 +84,6 @@ class CharactersFragment : Fragment() {
     private fun idle() {}
 
     private fun configureRecyclerView() {
-        // CAMBIAR DE POSICIÓN DE PERSONAJE A NOMBRE!!!!
         adapter = CharactersAdapter { characterId -> goToDetail(characterId) }
         binding.rvCharacters.setHasFixedSize(true)
         binding.rvCharacters.layoutManager = LinearLayoutManager(binding.root.context)

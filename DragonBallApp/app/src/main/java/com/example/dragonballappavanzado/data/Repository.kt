@@ -70,6 +70,12 @@ class Repository @Inject constructor(
         return localToUIMapper.mapCharacterDetail(localCharacter)
     }
 
+    suspend fun getFavoriteCharacters(): List<CharacterUI> {
+        val localCharacters: List<CharacterLocal> = localDataSource.getCharacters()
+        val localFavoriteCharacters: List<CharacterLocal> = localCharacters.filter { it.favorite }
+        return localToUIMapper.mapCharacters(localFavoriteCharacters)
+    }
+
     suspend fun updateLocalFavoriteStatus(characterId: String, isFavorite: Boolean) {
         localDataSource.updateFavoriteStatus(characterId, isFavorite)
     }
