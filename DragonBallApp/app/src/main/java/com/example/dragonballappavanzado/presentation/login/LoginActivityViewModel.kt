@@ -37,7 +37,7 @@ class LoginActivityViewModel @Inject constructor(
     fun onLoginSelected(email: String, password: String) {
         if (isValidEmail(email) && isValidPassword(password)) {
             saveCredentials(email, password)
-            loginUser(email, password)
+            loginUser()
         } else {
             onFieldsChanged(email, password)
         }
@@ -52,24 +52,20 @@ class LoginActivityViewModel @Inject constructor(
         }
     }
 
-    private fun loginUser(email: String, password: String) {
+    private fun loginUser() {
         viewModelScope.launch {
             _viewState.value = LoginViewState.Loading(true)
             withContext(dispatcher) {
                 when (val result = repository.login()) {
                     is LoginResult.Success -> {
-                        Log.d("SALVA", "Llamada exitosa")
                         repository.saveToken(result.token)
                         _viewState.value = LoginViewState.AccessCompleted()
                     }
                     is LoginResult.Error -> {
-                        Log.d("SALVA", "Llamada errónea")
                         _viewState.value = LoginViewState.Error(result.errorMessage)
                     }
                 }
             }
-            val tokenSaved = repository.getToken()
-            Log.d("SALVA", "El token que hay guardado es: $tokenSaved")
             _viewState.value = LoginViewState.Loading(false)
         }
     }

@@ -2,8 +2,12 @@ package com.example.dragonballappavanzado.di
 
 import android.content.Context
 import android.util.Log
+import com.example.dragonballappavanzado.data.local.LocalDataSource
+import com.example.dragonballappavanzado.data.local.LocalDataSourceInterface
 import com.example.dragonballappavanzado.data.local.sharedPreferences.SharedPreferencesService
 import com.example.dragonballappavanzado.data.remote.DragonBallApi
+import com.example.dragonballappavanzado.data.remote.RemoteDataSource
+import com.example.dragonballappavanzado.data.remote.RemoteDataSourceInterface
 import com.example.dragonballappavanzado.di.annotations.NetworkQualifier
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -21,7 +25,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
-
     @Provides
     fun provideContext(@ApplicationContext context: Context): Context = context
 
@@ -34,34 +37,28 @@ class NetworkModule {
         return OkHttpClient.Builder().addInterceptor { chain ->
             val originalRequest = chain.request()
             if (originalRequest.url.encodedPath.contains("login")) {
-                Log.d("SALVA", "Llamada va por LOGIN")
                 val email = sharedPreferencesService.getEmail()
                 val password = sharedPreferencesService.getPassword()
-                Log.d("SALVA", "Email: $email y Contraseña: $password")
                 val credentials = Credentials.basic(email, password)
                 val newRequest =
                     originalRequest.newBuilder().addHeader("Authorization", credentials).build()
                 chain.proceed(newRequest)
             } else if (originalRequest.url.encodedPath.contains("heros")) {
-                Log.d("SALVA", "Llamada va por HEROS")
                 val token = sharedPreferencesService.getToken()
                 val newRequest =
                     originalRequest.newBuilder().addHeader("Authorization", "Bearer $token").build()
                 chain.proceed(newRequest)
             } else if (originalRequest.url.encodedPath.contains("herolike")) {
-                Log.d("SALVA", "Llamada va por HEROLIKE")
                 val token = sharedPreferencesService.getToken()
                 val newRequest =
                     originalRequest.newBuilder().addHeader("Authorization", "Bearer $token").build()
                 chain.proceed(newRequest)
             } else if (originalRequest.url.encodedPath.contains("locations")) {
-                Log.d("SALVA", "Llamada va por LOCATIONS")
                 val token = sharedPreferencesService.getToken()
                 val newRequest =
                     originalRequest.newBuilder().addHeader("Authorization", "Bearer $token").build()
                 chain.proceed(newRequest)
             } else {
-                Log.d("SALVA", "Llamada va por NO SABE DÓNDE")
                 chain.proceed(originalRequest)
             }
         }.build()
@@ -85,5 +82,10 @@ class NetworkModule {
     @Provides
     fun providesDragonBallApi(retrofit: Retrofit): DragonBallApi {
         return retrofit.create(DragonBallApi::class.java)
+    }
+
+    @Provides
+    fun providesRemoteDataSourceInterface(remoteDataSource: RemoteDataSource): RemoteDataSourceInterface {
+        return remoteDataSource
     }
 }

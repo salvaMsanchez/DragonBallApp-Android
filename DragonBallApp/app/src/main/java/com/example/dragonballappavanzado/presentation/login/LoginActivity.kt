@@ -99,8 +99,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToHome() {
-        Log.d("SALVA", "NAVEGAMOOOOOOOSSS")
-        // SharedPreferencesService.saveToken(this, token = token)
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

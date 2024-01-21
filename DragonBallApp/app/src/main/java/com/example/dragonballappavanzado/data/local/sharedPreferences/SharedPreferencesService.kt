@@ -19,7 +19,7 @@ class SharedPreferencesService @Inject constructor(@ApplicationContext private v
     }
 
     fun saveEmail(key: String = EMAIL_KEY, email: String) {
-        with (sharedPref.edit()) {
+        with(sharedPref.edit()) {
             putString(key, email)
             commit()
         }
@@ -30,7 +30,7 @@ class SharedPreferencesService @Inject constructor(@ApplicationContext private v
     }
 
     fun savePassword(key: String = PASSWORD_KEY, password: String) {
-        with (sharedPref.edit()) {
+        with(sharedPref.edit()) {
             putString(key, password)
             commit()
         }
@@ -41,15 +41,8 @@ class SharedPreferencesService @Inject constructor(@ApplicationContext private v
     }
 
     fun saveToken(key: String = TOKEN_KEY, token: String) {
-        with (sharedPref.edit()) {
+        with(sharedPref.edit()) {
             putString(key, token)
-            commit()
-        }
-    }
-
-    fun deleteToken(key: String = TOKEN_KEY) {
-        with (sharedPref.edit()) {
-            remove(key)
             commit()
         }
     }

@@ -1,10 +1,10 @@
 package com.example.dragonballappavanzado.data
 
 import android.util.Log
-import com.example.dragonballappavanzado.data.local.LocalDataSource
+import com.example.dragonballappavanzado.data.local.LocalDataSourceInterface
 import com.example.dragonballappavanzado.data.mappers.LocalToUIMapper
 import com.example.dragonballappavanzado.data.mappers.RemoteToLocalMapper
-import com.example.dragonballappavanzado.data.remote.RemoteDataSource
+import com.example.dragonballappavanzado.data.remote.RemoteDataSourceInterface
 import com.example.dragonballappavanzado.data.remote.requests.LocationsRequest
 import com.example.dragonballappavanzado.data.remote.requests.UpdateFavoriteRequest
 import com.example.dragonballappavanzado.data.remote.response.CharacterRemote
@@ -14,27 +14,21 @@ import com.example.dragonballappavanzado.presentation.main.characterDetail.model
 import com.example.dragonballappavanzado.presentation.main.characterDetail.model.LocationUI
 import com.example.dragonballappavanzado.presentation.main.characters.model.CharacterUI
 import okio.IOException
-import java.lang.Exception
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSourceInterface,
+    private val remoteDataSource: RemoteDataSourceInterface,
     private val localToUIMapper: LocalToUIMapper,
     private val remoteToLocalMapper: RemoteToLocalMapper,
 ) {
-    // FUNCTIONS
     fun saveToken(token: String) = localDataSource.saveToken(token)
 
     fun getToken(): String = localDataSource.getToken()
 
     fun saveEmail(email: String) = localDataSource.saveEmail(email)
 
-    //suspend fun getEmail(): String = localDataSource.getEmail()
-
     fun savePassword(password: String) = localDataSource.savePassword(password)
-
-    //suspend fun getPassword(): String = localDataSource.getPassword()
 
     suspend fun login(): LoginResult {
         return try {
@@ -54,10 +48,8 @@ class Repository @Inject constructor(
         val localCharacters: List<CharacterLocal> = localDataSource.getCharacters()
 
         return if (localCharacters.isNotEmpty()) {
-            Log.d("SALVA", "Characters recuperados de BBDD")
             localToUIMapper.mapCharacters(localCharacters)
         } else {
-            Log.d("SALVA", "Characters recuperados de API")
             val remoteCharacters: List<CharacterRemote> = remoteDataSource.getHeroes()
             val charactersCleaned: List<CharacterRemote> = remoteCharacters.dropLast(1)
             localDataSource.insertCharacters(remoteToLocalMapper.mapCharacters(charactersCleaned))

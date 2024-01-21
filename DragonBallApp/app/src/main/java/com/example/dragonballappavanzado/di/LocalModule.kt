@@ -18,7 +18,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 class LocalModule {
-
     @Provides
     fun provideContext(@ApplicationContext context: Context): Context = context
 
