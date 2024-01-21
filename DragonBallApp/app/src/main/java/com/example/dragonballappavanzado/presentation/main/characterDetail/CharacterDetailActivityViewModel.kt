@@ -6,6 +6,7 @@ import com.example.dragonballappavanzado.data.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -38,8 +39,11 @@ class CharacterDetailActivityViewModel @Inject constructor(
 
     fun onFavoriteClicked(characterId: String, isFavorite: Boolean) {
         viewModelScope.launch {
-            withContext(dispatcher) {
+            async(dispatcher) {
                 repository.updateLocalFavoriteStatus(characterId, isFavorite)
+            }
+            async(dispatcher) {
+                repository.updateRemoteFavoriteStatus(characterId)
             }
         }
     }
