@@ -48,16 +48,13 @@ class RepositoryTest {
 
     @Test
     fun `WHEN getCharacter and empty database THEN success list`() = runTest {
-        // GIVEN
         val character: CharacterLocal = CharacterLocal("1234", "Goku", "photo", "description", false)
         localDataSource.insertCharacters(listOf(character))
         val localCharacter: CharacterLocal = localDataSource.getCharacter(character.id)
         val uiCharacter: CharacterDetailUI = localToUIMapper.mapCharacterDetail(localCharacter)
 
-        // WHEN
         val actual = repository.getCharacter(characterId = character.id)
 
-        // THEN
         Truth.assertThat(actual).isEqualTo(uiCharacter)
     }
 }
