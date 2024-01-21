@@ -8,6 +8,7 @@ import com.example.dragonballappavanzado.data.mappers.RemoteToLocalMapper
 import com.example.dragonballappavanzado.data.remote.RemoteDataSource
 import com.example.dragonballappavanzado.data.remote.response.CharacterRemote
 import com.example.dragonballappavanzado.domain.models.CharacterLocal
+import com.example.dragonballappavanzado.presentation.main.characterDetail.model.CharacterDetailUI
 import com.example.dragonballappavanzado.presentation.main.characters.model.CharacterUI
 import okio.IOException
 import java.lang.Exception
@@ -61,6 +62,11 @@ class Repository @Inject constructor(
             val updatedLocalCharacters: List<CharacterLocal> = localDataSource.getCharacters()
             localToUIMapper.mapCharacters(updatedLocalCharacters)
         }
+    }
+
+    suspend fun getCharacter(characterId: String): CharacterDetailUI {
+        val localCharacter = localDataSource.getCharacter(characterId)
+        return localToUIMapper.mapCharacterDetail(localCharacter)
     }
 }
 

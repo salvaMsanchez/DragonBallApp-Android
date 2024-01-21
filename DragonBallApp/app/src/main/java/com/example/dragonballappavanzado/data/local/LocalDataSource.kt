@@ -13,8 +13,16 @@ class LocalDataSource @Inject constructor(
         return dao.getAll()
     }
 
+    override fun getCharacter(characterId: String): CharacterLocal {
+        return dao.getCharacterById(characterId)
+    }
+
     override fun insertCharacters(characters: List<CharacterLocal>) {
         return dao.insertAll(characters)
+    }
+
+    override fun updateFavoriteStatus(characterId: String, isFavorite: Boolean) {
+        return dao.updateFavoriteStatus(characterId, isFavorite)
     }
 
     override fun saveToken(token: String) = sharedPreferencesService.saveToken(token = token)

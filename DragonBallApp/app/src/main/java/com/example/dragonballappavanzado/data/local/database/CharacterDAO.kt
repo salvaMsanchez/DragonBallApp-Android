@@ -11,9 +11,12 @@ interface CharacterDAO {
     @Query("SELECT * FROM characters")
     fun getAll(): List<CharacterLocal>
 
+    @Query("SELECT * FROM characters WHERE id = :characterId")
+    fun getCharacterById(characterId: String): CharacterLocal
+
     @Insert
     fun insertAll(heroes: List<CharacterLocal>)
 
-    @Query("UPDATE characters SET favorite = :isFavorite WHERE name = :characterName")
-    fun updateFavoriteStatus(characterName: String, isFavorite: Boolean)
+    @Query("UPDATE characters SET favorite = :isFavorite WHERE id = :characterId")
+    fun updateFavoriteStatus(characterId: String, isFavorite: Boolean)
 }

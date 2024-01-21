@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity() {
     // VIEW BINDING
     private lateinit var binding: ActivityLoginBinding
+
     // VIEW MODEL
     private val viewModel: LoginActivityViewModel by viewModels()
 
