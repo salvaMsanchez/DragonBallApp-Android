@@ -86,9 +86,11 @@ class CharacterDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         if (binding.ivBtnNoFavorite.isVisible) {
             binding.ivBtnNoFavorite.isVisible = !binding.ivBtnNoFavorite.isVisible
             binding.ivBtnFavorite.isVisible = !binding.ivBtnFavorite.isVisible
+            viewModel.onFavoriteClicked(args.characterId, true)
         } else if (binding.ivBtnFavorite.isVisible) {
             binding.ivBtnFavorite.isVisible = !binding.ivBtnFavorite.isVisible
             binding.ivBtnNoFavorite.isVisible = !binding.ivBtnNoFavorite.isVisible
+            viewModel.onFavoriteClicked(args.characterId, false)
         }
     }
 

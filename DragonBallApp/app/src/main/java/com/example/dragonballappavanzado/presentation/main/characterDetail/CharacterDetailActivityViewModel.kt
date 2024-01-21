@@ -35,4 +35,12 @@ class CharacterDetailActivityViewModel @Inject constructor(
     fun onMapLoaded() {
         _viewState.value = CharacterDetailViewState.Loading(false)
     }
+
+    fun onFavoriteClicked(characterId: String, isFavorite: Boolean) {
+        viewModelScope.launch {
+            withContext(dispatcher) {
+                repository.updateLocalFavoriteStatus(characterId, isFavorite)
+            }
+        }
+    }
 }

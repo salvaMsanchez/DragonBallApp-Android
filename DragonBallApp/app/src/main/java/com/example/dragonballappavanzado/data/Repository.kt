@@ -6,6 +6,7 @@ import com.example.dragonballappavanzado.data.local.sharedPreferences.SharedPref
 import com.example.dragonballappavanzado.data.mappers.LocalToUIMapper
 import com.example.dragonballappavanzado.data.mappers.RemoteToLocalMapper
 import com.example.dragonballappavanzado.data.remote.RemoteDataSource
+import com.example.dragonballappavanzado.data.remote.requests.UpdateFavoriteRequest
 import com.example.dragonballappavanzado.data.remote.response.CharacterRemote
 import com.example.dragonballappavanzado.domain.models.CharacterLocal
 import com.example.dragonballappavanzado.presentation.main.characterDetail.model.CharacterDetailUI
@@ -67,6 +68,15 @@ class Repository @Inject constructor(
     suspend fun getCharacter(characterId: String): CharacterDetailUI {
         val localCharacter = localDataSource.getCharacter(characterId)
         return localToUIMapper.mapCharacterDetail(localCharacter)
+    }
+
+    suspend fun updateLocalFavoriteStatus(characterId: String, isFavorite: Boolean) {
+        localDataSource.updateFavoriteStatus(characterId, isFavorite)
+    }
+
+    suspend fun updateRemoteFavoriteStatus(characterId: String) {
+        val request = UpdateFavoriteRequest(characterId)
+        remoteDataSource.updateFavoriteStatus(request)
     }
 }
 
