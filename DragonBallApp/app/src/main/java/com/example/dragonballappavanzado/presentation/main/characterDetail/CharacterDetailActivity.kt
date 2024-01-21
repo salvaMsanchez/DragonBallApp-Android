@@ -12,6 +12,7 @@ import coil.load
 import com.example.dragonballappavanzado.R
 import com.example.dragonballappavanzado.databinding.ActivityCharacterDetailBinding
 import com.example.dragonballappavanzado.presentation.main.characterDetail.model.CharacterDetailUI
+import com.example.dragonballappavanzado.presentation.main.characterDetail.model.LocationUI
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -70,7 +71,6 @@ class CharacterDetailActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun initListeners() {
-        binding.tvCharactersTitle.text = args.characterId
         binding.ivBtnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -107,7 +107,21 @@ class CharacterDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             is CharacterDetailViewState.Idle -> idle()
             is CharacterDetailViewState.CharacterLoaded -> updateCharacterInformation(viewState.character)
             is CharacterDetailViewState.Loading -> showLoading(viewState.loading)
+            is CharacterDetailViewState.LocationsLoaded -> updateMap(viewState.locations)
         }
+    }
+
+    private fun updateMap(locations: List<LocationUI>) {
+        locations.forEach { location ->
+            mMap.addMarker(
+                MarkerOptions()
+                    .position(LatLng(location.latitude, location.longitude))
+            )
+            mMap.addCircle(
+                CircleOptions().center(LatLng(location.latitude, location.longitude)).radius(12000.0).fillColor(Color.GREEN).strokeColor(Color.BLACK).strokeWidth(1f)
+            )
+        }
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locations.first().latitude, locations.first().longitude), 3f))
     }
 
     private fun showLoading(loading: Boolean) {
@@ -128,18 +142,5 @@ class CharacterDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(
-            MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney")
-        )
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-
-        mMap.addCircle(
-            CircleOptions().center(sydney).radius(12000.0).fillColor(Color.CYAN).strokeColor(Color.BLUE).strokeWidth(1f)
-        )
-        viewModel.onMapLoaded()
     }
 }

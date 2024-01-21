@@ -3,6 +3,7 @@ package com.example.dragonballappavanzado.presentation.main.characterDetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dragonballappavanzado.data.Repository
+import com.example.dragonballappavanzado.presentation.main.characterDetail.model.CharacterDetailUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -27,14 +28,15 @@ class CharacterDetailActivityViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = CharacterDetailViewState.Loading(true)
             withContext(dispatcher) {
+                val locations = repository.getLocations(characterId)
+                _viewState.value = CharacterDetailViewState.LocationsLoaded(locations)
+            }
+            withContext(dispatcher) {
                 val character = repository.getCharacter(characterId)
                 _viewState.value = CharacterDetailViewState.CharacterLoaded(character)
             }
+            _viewState.value = CharacterDetailViewState.Loading(false)
         }
-    }
-
-    fun onMapLoaded() {
-        _viewState.value = CharacterDetailViewState.Loading(false)
     }
 
     fun onFavoriteClicked(characterId: String, isFavorite: Boolean) {

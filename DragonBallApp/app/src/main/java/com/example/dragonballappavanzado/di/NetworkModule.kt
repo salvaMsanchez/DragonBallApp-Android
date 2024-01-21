@@ -54,6 +54,12 @@ class NetworkModule {
                 val newRequest =
                     originalRequest.newBuilder().addHeader("Authorization", "Bearer $token").build()
                 chain.proceed(newRequest)
+            } else if (originalRequest.url.encodedPath.contains("locations")) {
+                Log.d("SALVA", "Llamada va por LOCATIONS")
+                val token = sharedPreferencesService.getToken()
+                val newRequest =
+                    originalRequest.newBuilder().addHeader("Authorization", "Bearer $token").build()
+                chain.proceed(newRequest)
             } else {
                 Log.d("SALVA", "Llamada va por NO SABE DÓNDE")
                 chain.proceed(originalRequest)

@@ -2,14 +2,16 @@ package com.example.dragonballappavanzado.data
 
 import android.util.Log
 import com.example.dragonballappavanzado.data.local.LocalDataSource
-import com.example.dragonballappavanzado.data.local.sharedPreferences.SharedPreferencesService
 import com.example.dragonballappavanzado.data.mappers.LocalToUIMapper
 import com.example.dragonballappavanzado.data.mappers.RemoteToLocalMapper
 import com.example.dragonballappavanzado.data.remote.RemoteDataSource
+import com.example.dragonballappavanzado.data.remote.requests.LocationsRequest
 import com.example.dragonballappavanzado.data.remote.requests.UpdateFavoriteRequest
 import com.example.dragonballappavanzado.data.remote.response.CharacterRemote
+import com.example.dragonballappavanzado.data.remote.response.LocationRemote
 import com.example.dragonballappavanzado.domain.models.CharacterLocal
 import com.example.dragonballappavanzado.presentation.main.characterDetail.model.CharacterDetailUI
+import com.example.dragonballappavanzado.presentation.main.characterDetail.model.LocationUI
 import com.example.dragonballappavanzado.presentation.main.characters.model.CharacterUI
 import okio.IOException
 import java.lang.Exception
@@ -83,6 +85,12 @@ class Repository @Inject constructor(
     suspend fun updateRemoteFavoriteStatus(characterId: String) {
         val request = UpdateFavoriteRequest(characterId)
         remoteDataSource.updateFavoriteStatus(request)
+    }
+
+    suspend fun getLocations(characterId: String): List<LocationUI> {
+        val request = LocationsRequest(characterId)
+        val remoteLocations: List<LocationRemote> = remoteDataSource.getLocations(request)
+        return remoteLocations.map { LocationUI(it.latitude.toDouble(), it.longitude.toDouble()) }
     }
 }
 

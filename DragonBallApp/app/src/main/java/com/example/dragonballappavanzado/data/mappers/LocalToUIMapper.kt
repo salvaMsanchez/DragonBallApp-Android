@@ -7,12 +7,12 @@ import com.example.dragonballappavanzado.presentation.main.characters.model.Char
 import javax.inject.Inject
 
 class LocalToUIMapper @Inject constructor() {
-
     fun mapCharacters(localCharacters: List<CharacterLocal>): List<CharacterUI> {
         return localCharacters.map { CharacterUI(it.id, it.name, it.photo) }
     }
 
-    fun mapCharacterDetail(localCharacter: CharacterLocal): CharacterDetailUI = with(localCharacter) {
-        CharacterDetailUI(name, photo, description, favorite)
-    }
+    fun mapCharacterDetail(localCharacter: CharacterLocal): CharacterDetailUI =
+        with(localCharacter) {
+            CharacterDetailUI(name, photo, description, favorite)
+        }
 }

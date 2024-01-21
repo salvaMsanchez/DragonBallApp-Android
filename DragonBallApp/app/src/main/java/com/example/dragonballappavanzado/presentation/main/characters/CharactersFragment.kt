@@ -48,7 +48,6 @@ class CharactersFragment : Fragment() {
 
     // FUNCTIONS
     private fun initUI() {
-        //initListeners()
         initObservers()
         configureRecyclerView()
     }
@@ -70,12 +69,10 @@ class CharactersFragment : Fragment() {
     }
 
     private fun updateAdapter(characters: List<CharacterUI>) {
-        Log.d("SALVA", "Se va a actualizar la lista con: $characters")
         adapter.updateList(characters)
     }
 
     private fun showLoading(loading: Boolean) {
-        Log.d("SALVA", "Loading: $loading")
         binding.pbCharactersLoading.isVisible = loading
         binding.charactersToolbar.isVisible = !loading
         binding.rvCharacters.isVisible = !loading
@@ -91,16 +88,6 @@ class CharactersFragment : Fragment() {
     }
 
     private fun goToDetail(characterId: String) {
-        //val characterDetailFragment = CharacterDetailFragment.newInstance(characterPosition)
-        //val bindingHomeActivity = (requireActivity() as HomeActivity).binding
-
-        //requireActivity().supportFragmentManager
-        //  .beginTransaction()
-        //  .replace(bindingHomeActivity.fragmentContainerView.id, characterDetailFragment)
-        //.addToBackStack(null)
-        // .commit()
-
-        Log.d("SALVA", "Nombre del personaje seleccionado: $characterId")
         findNavController().navigate(
             CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailActivity(
                 characterId = characterId
