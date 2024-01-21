@@ -33,7 +33,6 @@ class Repository @Inject constructor(
     suspend fun login(): LoginResult {
         return try {
             val token = remoteDataSource.login()
-            Log.d("SALVA", "Token: $token")
             LoginResult.Success(token)
         } catch (e: Exception) {
             val errorMessage = when (e) {
