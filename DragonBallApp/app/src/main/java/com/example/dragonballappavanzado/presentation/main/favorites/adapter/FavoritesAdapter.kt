@@ -7,7 +7,7 @@ import com.example.dragonballappavanzado.R
 import com.example.dragonballappavanzado.presentation.main.characters.model.CharacterUI
 
 class FavoritesAdapter(
-    var favoriteCharacters: List<CharacterUI> = emptyList(),
+    private var favoriteCharacters: List<CharacterUI> = emptyList(),
 ): RecyclerView.Adapter<FavoritesViewHolder>() {
     fun updateList(characters: List<CharacterUI>) {
         this.favoriteCharacters = characters

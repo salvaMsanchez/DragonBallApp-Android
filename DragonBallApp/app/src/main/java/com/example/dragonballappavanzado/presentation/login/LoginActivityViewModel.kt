@@ -1,6 +1,5 @@
 package com.example.dragonballappavanzado.presentation.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dragonballappavanzado.data.LoginResult

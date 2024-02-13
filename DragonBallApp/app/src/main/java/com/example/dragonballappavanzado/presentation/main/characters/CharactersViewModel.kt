@@ -1,10 +1,8 @@
 package com.example.dragonballappavanzado.presentation.main.characters
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dragonballappavanzado.data.Repository
-import com.example.dragonballappavanzado.presentation.main.characters.model.CharacterUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

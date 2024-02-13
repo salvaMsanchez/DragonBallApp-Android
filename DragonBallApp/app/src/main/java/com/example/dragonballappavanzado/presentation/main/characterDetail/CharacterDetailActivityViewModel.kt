@@ -3,7 +3,6 @@ package com.example.dragonballappavanzado.presentation.main.characterDetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dragonballappavanzado.data.Repository
-import com.example.dragonballappavanzado.presentation.main.characterDetail.model.CharacterDetailUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

@@ -1,9 +1,6 @@
 package com.example.dragonballappavanzado.di
 
 import android.content.Context
-import android.util.Log
-import com.example.dragonballappavanzado.data.local.LocalDataSource
-import com.example.dragonballappavanzado.data.local.LocalDataSourceInterface
 import com.example.dragonballappavanzado.data.local.sharedPreferences.SharedPreferencesService
 import com.example.dragonballappavanzado.data.remote.DragonBallApi
 import com.example.dragonballappavanzado.data.remote.RemoteDataSource

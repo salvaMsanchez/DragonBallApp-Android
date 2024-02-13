@@ -1,6 +1,5 @@
 package com.example.dragonballappavanzado.data
 
-import android.util.Log
 import com.example.dragonballappavanzado.data.local.LocalDataSourceInterface
 import com.example.dragonballappavanzado.data.mappers.LocalToUIMapper
 import com.example.dragonballappavanzado.data.mappers.RemoteToLocalMapper
@@ -58,18 +57,18 @@ class Repository @Inject constructor(
         }
     }
 
-    suspend fun getCharacter(characterId: String): CharacterDetailUI {
+    fun getCharacter(characterId: String): CharacterDetailUI {
         val localCharacter = localDataSource.getCharacter(characterId)
         return localToUIMapper.mapCharacterDetail(localCharacter)
     }
 
-    suspend fun getFavoriteCharacters(): List<CharacterUI> {
+    fun getFavoriteCharacters(): List<CharacterUI> {
         val localCharacters: List<CharacterLocal> = localDataSource.getCharacters()
         val localFavoriteCharacters: List<CharacterLocal> = localCharacters.filter { it.favorite }
         return localToUIMapper.mapCharacters(localFavoriteCharacters)
     }
 
-    suspend fun updateLocalFavoriteStatus(characterId: String, isFavorite: Boolean) {
+    fun updateLocalFavoriteStatus(characterId: String, isFavorite: Boolean) {
         localDataSource.updateFavoriteStatus(characterId, isFavorite)
     }
 

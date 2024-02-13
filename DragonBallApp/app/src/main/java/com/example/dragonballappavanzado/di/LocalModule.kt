@@ -1,7 +1,6 @@
 package com.example.dragonballappavanzado.di
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.room.Room
 import com.example.dragonballappavanzado.data.local.LocalDataSource
 import com.example.dragonballappavanzado.data.local.LocalDataSourceInterface
