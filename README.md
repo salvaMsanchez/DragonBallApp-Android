@@ -159,7 +159,7 @@ El proyecto incluye pruebas obligatorias, que abarcan desde pruebas unitarias re
 #### Opcionales
 
 * Pantalla adicional de listado de favoritos.
-* Diseño visual abierto, permitiendo libertad en la elección de componentes y representación de información. Para el listado de personajes, me he inspirado en el **[concepto creativo y prototipo](https://dribbble.com/shots/2671572-Marvel-App/attachments/537660?mode=media)** del usuario llamado [Luis Herrero](https://dribbble.com/luisherrero) encontrado en la web [Dribbble](https://dribbble.com/shots/22234085-Dragon-Ball-Z-Character-Info).
+* Diseño visual abierto, permitiendo libertad en la elección de componentes y representación de información. Para el listado de personajes, me he inspirado en el **[concepto creativo y prototipo](https://dribbble.com/shots/2671572-Marvel-App/attachments/537660?mode=media)** del usuario llamado [Luis Herrero](https://dribbble.com/luisherrero) encontrado en la web [Dribbble](https://dribbble.com).
 
 <a name="instalacion"></a>
 ### Instalación
